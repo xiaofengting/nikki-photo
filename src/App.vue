@@ -86,9 +86,9 @@ function changeCheckSave(name: string, color: string) {
 
 function calcImgStyle() {
   if (checkSave.value === '手机壁纸') {
-    return `--bg-image: url(/src/assets/mobilebg/${saveColor.value.saveMobile}.jpg);`
+    return `--bg-image: url(/assets/mobilebg/${saveColor.value.saveMobile}.jpg);`
   } else if (checkSave.value === '电脑壁纸') {
-    return `--bg-image: url(/src/assets/pcbg/${saveColor.value.savePC}.jpg);`
+    return `--bg-image: url(/assets/pcbg/${saveColor.value.savePC}.jpg);`
   }
   return ''
 }
@@ -143,7 +143,7 @@ body {
   width: 100vw;
   min-height: 200px;
   background-color: #ffd0cf;
-  background-image: url(/src/assets/screen-bg.png);
+  background-image: url(/assets/screen-bg.png);
   background-size: cover;
   background-position: center;
   --font-color: #333;

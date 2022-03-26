@@ -48,7 +48,7 @@ function chooseUnitPart(item: faceimg) {
         v-for="item in arr"
         class="collapse-img"
         :class="{ active: props[item] }"
-        :style="`background-image: url(/src/assets/face/${item}-check.png);`"
+        :style="`background-image: url(/assets/face/${item}-check.png);`"
         @click="chooseUnitPart(item)"
       ></div>
       <p class="collapse-extra-info" style="width: 120px">说明：此处多选</p>

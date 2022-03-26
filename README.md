@@ -1,6 +1,5 @@
-仿闪耀暖暖大头贴小游戏。
-
-原地址：https://nikki4.papegames.cn/nikki_birthday9
+仿闪耀暖暖大头贴。  
+地址：https://nikki4.papegames.cn/nikki_birthday9
 
 TODO：
 

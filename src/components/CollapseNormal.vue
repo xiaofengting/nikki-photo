@@ -32,11 +32,11 @@ function chooseUnitColor(color: string) {
 function stop() {}
 function calcImgStyle(item: string) {
   if (props.unit === 'frontHair') {
-    return `--before-image: url(/src/assets/frontHair/${
+    return `--before-image: url(/assets/frontHair/${
       item ? item + props.activeColor : 'none'
     }.png);`
   } else if (props.unitColor || props.unit === 'hair') {
-    let str = `background-image: url(/src/assets/${
+    let str = `background-image: url(/assets/${
       item ? props.unit + '/' + item + props.activeColor : 'none'
     }.png);`
     if (item && props.bgPositionX) str += `background-position-x: ${props.bgPositionX};`
@@ -44,11 +44,11 @@ function calcImgStyle(item: string) {
     if (item && props.bgSize) str += `background-size: ${props.bgSize};`
     return str
   } else if (props.unit === 'ts' || props.unit === 'front') {
-    return `background-image: url(/src/assets/${
+    return `background-image: url(/assets/${
       item ? props.unit + '/' + item + '-check' : 'none'
     }.png);`
   }
-  let str = `background-image: url(/src/assets/${item ? props.unit + '/' + item : 'none'}.png);`
+  let str = `background-image: url(/assets/${item ? props.unit + '/' + item : 'none'}.png);`
   if (item && props.bgPositionX) str += `background-position-x: ${props.bgPositionX};`
   if (item && props.bgPositionY) str += `background-position-y: ${props.bgPositionY};`
   if (item && props.bgSize) str += `background-size: ${props.bgSize};`
@@ -109,7 +109,7 @@ if (props.unit === 'fw') {
         </div>
       </div>
     </div>
-    <div role="tabpanel" class="collapse-wrap" :class="{ active: showTab }">
+    <div v-if="showTab" role="tabpanel" class="collapse-wrap" :class="{ active: showTab }">
       <div
         v-for="item in arr"
         class="collapse-img"
@@ -139,13 +139,13 @@ if (props.unit === 'fw') {
   bottom: 0;
 }
 .collapse-img-frontHair .collapse-img {
-  background-image: url(/src/assets/body.png);
+  background-image: url(/assets/body.png);
 }
 .collapse-img-frontHair .collapse-img::after {
   background-image: var(--before-image);
 }
 .collapse-img-hair .collapse-img::after {
-  background-image: url(/src/assets/body.png);
+  background-image: url(/assets/body.png);
 }
 .collapse-extra-info {
   line-height: 30px;
