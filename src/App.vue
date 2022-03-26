@@ -125,12 +125,12 @@ function calcImgStyle() {
         @choose-color="chooseColor"
       />
     </div>
+    <transition name="final">
+      <div v-if="isFinal" class="final-cover" @click="hideShow">
+        <img :src="finalUrl" />
+      </div>
+    </transition>
   </div>
-  <transition name="final">
-    <div v-if="isFinal" class="final-cover" @click="hideShow">
-      <img :src="finalUrl" />
-    </div>
-  </transition>
 </template>
 
 <style>
