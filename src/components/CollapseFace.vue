@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Ref, ref } from 'vue'
+import { ref } from 'vue'
+import { imgSrc } from '../partData'
 
 const props = defineProps<{
   heart: boolean
@@ -48,7 +49,7 @@ function chooseUnitPart(item: faceimg) {
         v-for="item in arr"
         class="collapse-img"
         :class="{ active: props[item] }"
-        :style="`background-image: url(/assets/face/${item}-check.png);`"
+        :style="`background-image: url(${imgSrc}/face/${item}-check.png);`"
         @click="chooseUnitPart(item)"
       ></div>
       <p class="collapse-extra-info" style="width: 120px">说明：此处多选</p>

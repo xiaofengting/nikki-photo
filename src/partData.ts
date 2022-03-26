@@ -12,7 +12,6 @@ type partObj = {
   bgSize?: string,
 }
 
-
 var PartFace = {
   heart: false,
   tear: false,
@@ -114,6 +113,8 @@ var PartNormalData: Array<partObj> = [
   },
 ]
 
+var imgSrc = import.meta.env.BASE_URL + 'assets'
+
 export {
-  PartNormalData, unitName, colorUnitName, PartFace
+  PartNormalData, unitName, colorUnitName, PartFace, imgSrc
 }

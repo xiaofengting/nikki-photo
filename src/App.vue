@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PartNormalData, unitName, colorUnitName } from './partData'
+import { PartNormalData, unitName, colorUnitName, imgSrc } from './partData'
 import StickerShow from './components/StickerShow.vue'
 import CollapseNormal from './components/CollapseNormal.vue'
 import CollapseFace from './components/CollapseFace.vue'
@@ -86,9 +86,9 @@ function changeCheckSave(name: string, color: string) {
 
 function calcImgStyle() {
   if (checkSave.value === '手机壁纸') {
-    return `--bg-image: url(/assets/mobilebg/${saveColor.value.saveMobile}.jpg);`
+    return `--bg-image: url(${imgSrc}/mobilebg/${saveColor.value.saveMobile}.jpg);`
   } else if (checkSave.value === '电脑壁纸') {
-    return `--bg-image: url(/assets/pcbg/${saveColor.value.savePC}.jpg);`
+    return `--bg-image: url(${imgSrc}/pcbg/${saveColor.value.savePC}.jpg);`
   }
   return ''
 }

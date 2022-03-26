@@ -3,7 +3,6 @@
 
 TODO：
 
-- [ ] GitHub star
 - [ ] 搭配码
 - [ ] 贴贴
 - [ ] PWA

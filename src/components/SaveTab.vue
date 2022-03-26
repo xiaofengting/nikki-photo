@@ -74,7 +74,16 @@ function chooseBgColor(name: string, color: string) {
         @click="changeCheckSave('电脑壁纸')"
         @choose-bg-color="chooseBgColor"
       />
-      <div class="collapse-extra-save" @click="saveImage">生 成</div>
+      <div class="collapse-extra-btns">
+        <div class="collapse-extra-save" @click="saveImage">生 成</div>
+        <a
+          class="collapse-extra-github"
+          href="https://github.com/xiaofengting/nikki-photo"
+          target="_blank"
+        >
+          Github
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -87,9 +96,17 @@ function chooseBgColor(name: string, color: string) {
   padding-left: 30px;
   --color-save: #e91e63;
   --color-save-hover: #ff508c;
+  --color-github: #4aa9a4;
+  --color-github-hover: #64c3c4;
 }
 .collapse-savetab-svg {
   margin: 0 5px;
+}
+.collapse-extra-btns {
+  width: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .collapse-extra-save {
   background: var(--color-save);
@@ -99,9 +116,24 @@ function chooseBgColor(name: string, color: string) {
   color: #fff;
   border-radius: 15px;
   box-shadow: -1px 1px 8px rgba(0, 0, 0, 0.2);
+  display: block;
 }
-.collapse-extra-save :hover {
+.collapse-extra-save:hover {
   background: var(--color-save-hover);
+  box-shadow: -2px 2px 16px rgba(0, 0, 0, 0.3);
+}
+.collapse-extra-github {
+  text-decoration: none;
+  background: var(--color-github);
+  margin: 5px 0;
+  padding: 6px 20px;
+  color: #fff;
+  border-radius: 15px;
+  box-shadow: -1px 1px 8px rgba(0, 0, 0, 0.2);
+  display: block;
+}
+.collapse-extra-github:hover {
+  background: var(--color-github-hover);
   box-shadow: -2px 2px 16px rgba(0, 0, 0, 0.3);
 }
 </style>

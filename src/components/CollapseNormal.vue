@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { unitName, colorUnitName } from '../partData'
+import { unitName, colorUnitName, imgSrc } from '../partData'
 
 const props = defineProps<{
   title: string
@@ -32,11 +32,11 @@ function chooseUnitColor(color: string) {
 function stop() {}
 function calcImgStyle(item: string) {
   if (props.unit === 'frontHair') {
-    return `--before-image: url(/assets/frontHair/${
+    return `--before-image: url(${imgSrc}/frontHair/${
       item ? item + props.activeColor : 'none'
     }.png);`
   } else if (props.unitColor || props.unit === 'hair') {
-    let str = `background-image: url(/assets/${
+    let str = `background-image: url(${imgSrc}/${
       item ? props.unit + '/' + item + props.activeColor : 'none'
     }.png);`
     if (item && props.bgPositionX) str += `background-position-x: ${props.bgPositionX};`
@@ -44,11 +44,11 @@ function calcImgStyle(item: string) {
     if (item && props.bgSize) str += `background-size: ${props.bgSize};`
     return str
   } else if (props.unit === 'ts' || props.unit === 'front') {
-    return `background-image: url(/assets/${
+    return `background-image: url(${imgSrc}/${
       item ? props.unit + '/' + item + '-check' : 'none'
     }.png);`
   }
-  let str = `background-image: url(/assets/${item ? props.unit + '/' + item : 'none'}.png);`
+  let str = `background-image: url(${imgSrc}/${item ? props.unit + '/' + item : 'none'}.png);`
   if (item && props.bgPositionX) str += `background-position-x: ${props.bgPositionX};`
   if (item && props.bgPositionY) str += `background-position-y: ${props.bgPositionY};`
   if (item && props.bgSize) str += `background-size: ${props.bgSize};`
