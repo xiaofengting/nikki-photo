@@ -157,6 +157,7 @@ function changeMode() {
         @choose-color="chooseColor"
       />
       <CollapseNormal
+        v-if="parts.doubleMode"
         v-for="item in PartLeftData"
         v-bind="item"
         :active="parts[item.unit]"
