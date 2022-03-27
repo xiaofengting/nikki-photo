@@ -1,5 +1,8 @@
-type unitName = 'dress' | 'hair' | 'eye' | 'eyebrow' | 'mouth' | 'hand' | 'frontHair' | 'front' | 'ts' | 'bg' | 'fw'
+type unitName = 'dress' | 'hair' | 'eye' | 'eyebrow' | 'mouth' | 'hand' | 'frontHair'
+  | 'front' | 'ts' | 'bg' | 'fw' |
+  'dressLeft' | 'hairLeft' | 'eyeLeft' | 'eyebrowLeft' | 'mouthLeft' | 'handLeft' | 'frontHairLeft'
 type colorUnitName = 'frontHairColor' | 'eyeColor' | 'eyebrowColor' | 'mouthColor' | 'bgColor' | 'fwColor'
+  | 'frontHairColorLeft' | 'eyeColorLeft' | 'eyebrowColorLeft' | 'mouthColorLeft'
 
 type partObj = {
   title: string,
@@ -51,14 +54,14 @@ var PartNormalData: Array<partObj> = [
     arr: ['close1', 'close2', 'jz', 'kiss', 'open', 'smile']
   },
   {
-    title: '头发（前面）',
+    title: '头发',
     unit: 'frontHair',
     unitColor: 'frontHairColor',
     colorful: true,
     arr: ['wlh', 'qlhbj', 'qlh', 'sllh', 'sqf', 'sqfxbz', 'bzlh']
   },
   {
-    title: '头发（后面）',
+    title: '辫子',
     unit: 'hair',
     colorful: false,
     arr: ['dwztg', 'smwd', 'smwg', 'dmwg', 'nsdf', 'pfc', 'smwdb', 'zjchs']
@@ -88,6 +91,9 @@ var PartNormalData: Array<partObj> = [
     colorful: false,
     arr: ['', 'butterHead', 'butterP', 'butterY', 'catEar', 'eyemask', 'leaf', 'rabitEar', 'star', 'sunGluss']
   },
+]
+
+var PartDecorateData: Array<partObj> = [
   {
     title: '装饰',
     unit: 'front',
@@ -113,8 +119,16 @@ var PartNormalData: Array<partObj> = [
   },
 ]
 
+var PartLeftData: Array<partObj> = PartNormalData.map(item => {
+  const itemLeft = Object.assign({}, item)
+  itemLeft.unit += 'Left'
+  itemLeft.title += '（左）'
+  if (itemLeft.unitColor) itemLeft.unitColor += 'Left'
+  return itemLeft
+})
+
 var imgSrc = import.meta.env.BASE_URL + 'assets'
 
 export {
-  PartNormalData, unitName, colorUnitName, PartFace, imgSrc
+  PartNormalData, PartDecorateData, PartLeftData, unitName, colorUnitName, PartFace, imgSrc
 }

@@ -31,24 +31,24 @@ function chooseUnitColor(color: string) {
 }
 function stop() {}
 function calcImgStyle(item: string) {
-  if (props.unit === 'frontHair') {
+  let unit = props.unit.replace('Left', '')
+  let unitColor = props.unitColor?.replace('Left', '') || ''
+  if (unit === 'frontHair') {
     return `--before-image: url(${imgSrc}/frontHair/${
       item ? item + props.activeColor : 'none'
     }.png);`
-  } else if (props.unitColor || props.unit === 'hair') {
+  } else if (unitColor || unit === 'hair') {
     let str = `background-image: url(${imgSrc}/${
-      item ? props.unit + '/' + item + props.activeColor : 'none'
+      item ? unit + '/' + item + props.activeColor : 'none'
     }.png);`
     if (item && props.bgPositionX) str += `background-position-x: ${props.bgPositionX};`
     if (item && props.bgPositionY) str += `background-position-y: ${props.bgPositionY};`
     if (item && props.bgSize) str += `background-size: ${props.bgSize};`
     return str
-  } else if (props.unit === 'ts' || props.unit === 'front') {
-    return `background-image: url(${imgSrc}/${
-      item ? props.unit + '/' + item + '-check' : 'none'
-    }.png);`
+  } else if (unit === 'ts' || unit === 'front') {
+    return `background-image: url(${imgSrc}/${item ? unit + '/' + item + '-check' : 'none'}.png);`
   }
-  let str = `background-image: url(${imgSrc}/${item ? props.unit + '/' + item : 'none'}.png);`
+  let str = `background-image: url(${imgSrc}/${item ? unit + '/' + item : 'none'}.png);`
   if (item && props.bgPositionX) str += `background-position-x: ${props.bgPositionX};`
   if (item && props.bgPositionY) str += `background-position-y: ${props.bgPositionY};`
   if (item && props.bgSize) str += `background-size: ${props.bgSize};`
@@ -66,9 +66,13 @@ if (props.unit === 'fw') {
     value: 'linear-gradient(135deg, #ffc3be 50%, #fff 50%)'
   })
   colorPicks.value.push({ name: 'black', value: '#75696c' })
-} else if (props.unit === 'frontHair' || props.unit === 'eyebrow' || props.unit === 'bg') {
+} else if (
+  props.unit.startsWith('frontHair') ||
+  props.unit.startsWith('eyebrow') ||
+  props.unit === 'bg'
+) {
   colorPicks.value.push({ name: 'black', value: '#75696c' })
-} else if (props.unit === 'eye' || props.unit === 'mouth') {
+} else if (props.unit.startsWith('eye') || props.unit.startsWith('mouth')) {
   colorPicks.value.push({ name: 'brown', value: '#c2958b' })
 }
 </script>
@@ -77,8 +81,8 @@ if (props.unit === 'fw') {
   <div
     class="collapse-tab"
     :class="{
-      'collapse-img-hair': unit === 'hair',
-      'collapse-img-frontHair': unit === 'frontHair'
+      'collapse-img-hair': unit.startsWith('hair'),
+      'collapse-img-frontHair': unit.startsWith('frontHair')
     }"
   >
     <div role="tab">

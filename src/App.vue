@@ -1,8 +1,16 @@
 <script setup lang="ts">
-import { PartNormalData, unitName, colorUnitName, imgSrc } from './partData'
+import {
+  PartNormalData,
+  PartDecorateData,
+  PartLeftData,
+  unitName,
+  colorUnitName,
+  imgSrc
+} from './partData'
 import StickerShow from './components/StickerShow.vue'
 import CollapseNormal from './components/CollapseNormal.vue'
 import CollapseFace from './components/CollapseFace.vue'
+import DoubleTab from './components/DoubleTab.vue'
 import SaveTab from './components/SaveTab.vue'
 import html2canvas from 'html2canvas'
 import { ref } from 'vue'
@@ -34,29 +42,45 @@ function hideShow() {
 
 const parts = ref({
   eye: 'highlight1',
-  eyeColor: 'pink',
+  eyeColor: 'purple',
   eyebrow: 'ptm',
-  eyebrowColor: 'pink',
-  mouth: 'close1',
+  eyebrowColor: 'black',
+  mouth: 'smile',
   mouthColor: 'pink',
-  frontHair: 'wlh',
-  frontHairColor: 'pink',
-  hair: 'smwd',
-  hairColor: 'pink',
-  dress: 'zcdgb',
-  hand: '',
-  ts: 'rabitEar',
-  front: '',
-  bg: '',
-  bgColor: 'pink',
-  fw: '',
-  fwColor: 'pink',
-  heart: false,
+  frontHair: 'qlhbj',
+  frontHairColor: 'purple',
+  hair: 'pfc',
+  hairColor: 'purple',
+  dress: 'dts',
+  hand: 'milk',
+  ts: 'star',
+  heart: true,
   tear: false,
   star: false,
-  red: false,
-  saveMobile: '',
-  savePC: ''
+  red: true,
+  front: 'birth',
+  bg: 'circle',
+  bgColor: 'purple',
+  fw: 'circleDot',
+  fwColor: 'purple',
+  doubleMode: false,
+  eyeLeft: 'smile',
+  eyeColorLeft: 'purple',
+  eyebrowLeft: 'ptm',
+  eyebrowColorLeft: 'black',
+  mouthLeft: 'close1',
+  mouthColorLeft: 'pink',
+  frontHairLeft: 'wlh',
+  frontHairColorLeft: 'pink',
+  hairLeft: 'zjchs',
+  hairColorLeft: 'pink',
+  dressLeft: 'lmt',
+  handLeft: '',
+  tsLeft: 'catEar',
+  heartLeft: true,
+  tearLeft: false,
+  starLeft: false,
+  redLeft: true
 })
 
 function choosePart(unit: unitName, item: string) {
@@ -65,6 +89,9 @@ function choosePart(unit: unitName, item: string) {
 function chooseColor(unit: colorUnitName, color: string) {
   if (unit === 'frontHairColor') {
     parts.value.hairColor = color
+  }
+  if (unit === 'frontHairColorLeft') {
+    parts.value.hairColorLeft = color
   }
   parts.value[unit] = color
 }
@@ -92,6 +119,10 @@ function calcImgStyle() {
   }
   return ''
 }
+
+function changeMode() {
+  parts.value.doubleMode = !parts.value.doubleMode
+}
 </script>
 
 <template>
@@ -108,6 +139,7 @@ function calcImgStyle() {
       <sticker-show v-bind="parts" />
     </div>
     <div class="right-block">
+      <DoubleTab :double-mode="parts.doubleMode" @change-mode="changeMode"></DoubleTab>
       <SaveTab :check-save="checkSave" @save-image="toImage" @change-check-save="changeCheckSave" />
       <CollapseFace
         :heart="parts.heart"
@@ -118,6 +150,22 @@ function calcImgStyle() {
       />
       <CollapseNormal
         v-for="item in PartNormalData"
+        v-bind="item"
+        :active="parts[item.unit]"
+        :active-color="parts[item.unitColor || 'frontHairColor']"
+        @choose-part="choosePart"
+        @choose-color="chooseColor"
+      />
+      <CollapseNormal
+        v-for="item in PartLeftData"
+        v-bind="item"
+        :active="parts[item.unit]"
+        :active-color="parts[item.unitColor || 'frontHairColor']"
+        @choose-part="choosePart"
+        @choose-color="chooseColor"
+      />
+      <CollapseNormal
+        v-for="item in PartDecorateData"
         v-bind="item"
         :active="parts[item.unit]"
         :active-color="parts[item.unitColor || 'frontHairColor']"
@@ -137,6 +185,7 @@ function calcImgStyle() {
 * {
   margin: 0;
   padding: 0;
+  user-select: none;
 }
 body {
   height: 100vh;
@@ -205,7 +254,6 @@ body {
 
 .collapse-tab {
   border-bottom: 1px solid #ebeef5;
-  user-select: none;
 }
 .collapse-header {
   display: flex;
@@ -266,6 +314,9 @@ body {
 }
 .collapse-color-item.active {
   border-color: #ffabbb;
+}
+.photo-sticker {
+  overflow: hidden;
 }
 .photo-vanilla .left-block {
   height: 70vmin;
