@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { imgSrc } from '../partData'
+import { imgMap } from '../partData'
 
 const props = defineProps<{
   heart: boolean
@@ -20,6 +20,10 @@ const emit = defineEmits<{
 }>()
 function chooseUnitPart(item: faceimg) {
   emit('chooseFace', item)
+}
+function imgStyle(item: string) {
+  const url = imgMap[`${item}Check`]
+  return { backgroundImage: `url(${url})` }
 }
 </script>
 
@@ -49,7 +53,7 @@ function chooseUnitPart(item: faceimg) {
         v-for="item in arr"
         class="collapse-img"
         :class="{ active: props[item] }"
-        :style="`background-image: url(${imgSrc}/face/${item}-check.png);`"
+        :style="imgStyle(item)"
         @click="chooseUnitPart(item)"
       ></div>
       <p class="collapse-extra-info" style="width: 120px">说明：此处多选</p>

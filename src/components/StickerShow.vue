@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { imgSrc } from '../partData'
-const props = defineProps<{
+import { imgMap } from '../partData'
+defineProps<{
   eye: string
   eyeColor: string
   eyebrow: string
@@ -46,91 +46,42 @@ const props = defineProps<{
 
 <template>
   <div class="photo-sticker" :class="{ 'double-mode': doubleMode }">
-    <img class="photo-part" v-if="bg" :src="`${imgSrc}/bg/${bg}${bgColor}.png`" />
-    <img class="photo-part" v-if="fw" :src="`${imgSrc}/fw/${fw}${fwColor}.png`" />
-    <img class="photo-part" v-if="front" :src="`${imgSrc}/front/${front}.png`" />
-    <img
-      class="photo-part photo-left"
-      v-if="doubleMode"
-      :src="`${imgSrc}/hair/${hairLeft}${hairColorLeft}.png`"
-    />
-    <img class="photo-part photo-right" :src="`${imgSrc}/hair/${hair}${hairColor}.png`" />
-    <img class="photo-part photo-left" v-if="doubleMode" :src="`${imgSrc}/body.png`" />
-    <img
-      class="photo-part photo-left"
-      v-if="doubleMode"
-      :src="`${imgSrc}/dress/${dressLeft}.png`"
-    />
-    <img
-      class="photo-part photo-left"
-      v-if="doubleMode"
-      :src="`${imgSrc}/eye/${eyeLeft}${eyeColorLeft}.png`"
-    />
-    <img
-      class="photo-part photo-left"
-      v-if="doubleMode"
-      :src="`${imgSrc}/eyebrow/${eyebrowLeft}${eyebrowColorLeft}.png`"
-    />
-    <img
-      class="photo-part photo-left"
-      v-if="doubleMode"
-      :src="`${imgSrc}/mouth/${mouthLeft}${mouthColorLeft}.png`"
-    />
-    <img
-      class="photo-part photo-left"
-      v-if="doubleMode"
-      :src="`${imgSrc}/frontHair/${frontHairLeft}${frontHairColorLeft}.png`"
-    />
-    <img
-      class="photo-part photo-left"
-      v-if="doubleMode && handLeft"
-      :src="`${imgSrc}/hand/${handLeft}.png`"
-    />
-    <img
-      class="photo-part photo-left"
-      v-if="doubleMode && tsLeft"
-      :src="`${imgSrc}/ts/${tsLeft}.png`"
-    />
-    <img
-      class="photo-part photo-left"
-      v-if="doubleMode && heartLeft"
-      :src="`${imgSrc}/face/heart.png`"
-    />
-    <img
-      class="photo-part photo-left"
-      v-if="doubleMode && tearLeft"
-      :src="`${imgSrc}/face/tear.png`"
-    />
-    <img
-      class="photo-part photo-left"
-      v-if="doubleMode && starLeft"
-      :src="`${imgSrc}/face/star.png`"
-    />
-    <img
-      class="photo-part photo-left"
-      v-if="doubleMode && redLeft"
-      :src="`${imgSrc}/face/red.png`"
-    />
-    <img class="photo-part photo-right" :src="`${imgSrc}/body.png`" />
-    <img class="photo-part photo-right" :src="`${imgSrc}/dress/${dress}.png`" />
-    <img class="photo-part photo-right" :src="`${imgSrc}/eye/${eye}${eyeColor}.png`" />
-    <img class="photo-part photo-right" :src="`${imgSrc}/eyebrow/${eyebrow}${eyebrowColor}.png`" />
-    <img class="photo-part photo-right" :src="`${imgSrc}/mouth/${mouth}${mouthColor}.png`" />
-    <img
-      class="photo-part photo-right"
-      :src="`${imgSrc}/frontHair/${frontHair}${frontHairColor}.png`"
-    />
-    <img class="photo-part photo-right" v-if="hand" :src="`${imgSrc}/hand/${hand}.png`" />
-    <img class="photo-part photo-right" v-if="ts" :src="`${imgSrc}/ts/${ts}.png`" />
-    <img class="photo-part photo-right" v-if="heart" :src="`${imgSrc}/face/heart.png`" />
-    <img class="photo-part photo-right" v-if="tear" :src="`${imgSrc}/face/tear.png`" />
-    <img class="photo-part photo-right" v-if="star" :src="`${imgSrc}/face/star.png`" />
-    <img class="photo-part photo-right" v-if="red" :src="`${imgSrc}/face/red.png`" />
+    <img v-if="bg" :src="imgMap[`${bg}${bgColor}`]" />
+    <img v-if="fw" :src="imgMap[`${fw}${fwColor}`]" />
+    <img class="photo-left" v-if="doubleMode" :src="imgMap[`${hairLeft}${hairColorLeft}`]" />
+    <img class="photo-right" :src="imgMap[`${hair}${hairColor}`]" />
+    <template v-if="doubleMode">
+      <img class="photo-left" :src="imgMap['body']" />
+      <img class="photo-left" :src="imgMap[`${dressLeft}`]" />
+      <img class="photo-left" :src="imgMap[`${eyeLeft}${eyeColorLeft}`]" />
+      <img class="photo-left" :src="imgMap[`${eyebrowLeft}${eyebrowColorLeft}`]" />
+      <img class="photo-left" :src="imgMap[`${mouthLeft}${mouthColorLeft}`]" />
+      <img class="photo-left" :src="imgMap[`${frontHairLeft}${frontHairColorLeft}`]" />
+    </template>
+    <img class="photo-left" v-if="doubleMode && handLeft" :src="imgMap[`${handLeft}`]" />
+    <img class="photo-left" v-if="doubleMode && tsLeft" :src="imgMap[`${tsLeft}`]" />
+    <img class="photo-left" v-if="doubleMode && heartLeft" :src="imgMap['heart']" />
+    <img class="photo-left" v-if="doubleMode && tearLeft" :src="imgMap['tear']" />
+    <img class="photo-left" v-if="doubleMode && starLeft" :src="imgMap['star']" />
+    <img class="photo-left" v-if="doubleMode && redLeft" :src="imgMap['red']" />
+    <img class="photo-right" :src="imgMap['body']" />
+    <img class="photo-right" :src="imgMap[`${dress}`]" />
+    <img class="photo-right" :src="imgMap[`${eye}${eyeColor}`]" />
+    <img class="photo-right" :src="imgMap[`${eyebrow}${eyebrowColor}`]" />
+    <img class="photo-right" :src="imgMap[`${mouth}${mouthColor}`]" />
+    <img class="photo-right" :src="imgMap[`${frontHair}${frontHairColor}`]" />
+    <img class="photo-right" v-if="hand" :src="imgMap[`${hand}`]" />
+    <img class="photo-right" v-if="ts" :src="imgMap[`${ts}`]" />
+    <img class="photo-right" v-if="heart" :src="imgMap['heart']" />
+    <img class="photo-right" v-if="tear" :src="imgMap['tear']" />
+    <img class="photo-right" v-if="star" :src="imgMap['star']" />
+    <img class="photo-right" v-if="red" :src="imgMap['red']" />
+    <img v-if="front" :src="imgMap[`${front}`]" />
   </div>
 </template>
 
 <style>
-.photo-part {
+.photo-sticker img {
   position: absolute;
   top: 0;
   left: 0;

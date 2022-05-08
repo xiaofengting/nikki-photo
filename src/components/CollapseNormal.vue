@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { unitName, colorUnitName, imgSrc } from '../partData'
+import { unitName, colorUnitName, imgMap } from '../partData'
 
 const props = defineProps<{
   title: string
@@ -34,25 +34,26 @@ function calcImgStyle(item: string) {
   let unit = props.unit.replace('Left', '')
   let unitColor = props.unitColor?.replace('Left', '') || ''
   if (unit === 'frontHair') {
-    return `--before-image: url(${imgSrc}/frontHair/${
-      item ? item + props.activeColor : 'none'
-    }.png);`
+    const url = item ? item + props.activeColor : 'none'
+    return `--before-image: url(${imgMap[url]});`
   } else if (unitColor || unit === 'hair') {
-    let str = `background-image: url(${imgSrc}/${
-      item ? unit + '/' + item + props.activeColor : 'none'
-    }.png);`
+    const url = item ? item + props.activeColor : 'none'
+    let str = `background-image: url(${imgMap[url]});`
     if (item && props.bgPositionX) str += `background-position-x: ${props.bgPositionX};`
     if (item && props.bgPositionY) str += `background-position-y: ${props.bgPositionY};`
     if (item && props.bgSize) str += `background-size: ${props.bgSize};`
     return str
   } else if (unit === 'ts' || unit === 'front') {
-    return `background-image: url(${imgSrc}/${item ? unit + '/' + item + '-check' : 'none'}.png);`
+    const url = item ? item + 'Check' : 'none'
+    return `background-image: url(${imgMap[url]});`
+  } else {
+    const url = item ? item : 'none'
+    let str = `background-image: url(${imgMap[url]});`
+    if (item && props.bgPositionX) str += `background-position-x: ${props.bgPositionX};`
+    if (item && props.bgPositionY) str += `background-position-y: ${props.bgPositionY};`
+    if (item && props.bgSize) str += `background-size: ${props.bgSize};`
+    return str
   }
-  let str = `background-image: url(${imgSrc}/${item ? unit + '/' + item : 'none'}.png);`
-  if (item && props.bgPositionX) str += `background-position-x: ${props.bgPositionX};`
-  if (item && props.bgPositionY) str += `background-position-y: ${props.bgPositionY};`
-  if (item && props.bgSize) str += `background-size: ${props.bgSize};`
-  return str
 }
 let colorPicks = ref([
   { name: 'pink', value: '#ffc3be' },
@@ -143,13 +144,13 @@ if (props.unit === 'fw') {
   bottom: 0;
 }
 .collapse-img-frontHair .collapse-img {
-  background-image: url(/assets/body.png);
+  background-image: url(../assets/body.png);
 }
 .collapse-img-frontHair .collapse-img::after {
   background-image: var(--before-image);
 }
 .collapse-img-hair .collapse-img::after {
-  background-image: url(/assets/body.png);
+  background-image: url(../assets/body.png);
 }
 .collapse-extra-info {
   line-height: 30px;

@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import {
-  PartNormalData,
-  PartDecorateData,
-  PartLeftData,
-  unitName,
-  colorUnitName,
-  imgSrc
-} from './partData'
+import { PartNormalData, PartDecorateData, PartLeftData, unitName, colorUnitName } from './partData'
 import StickerShow from './components/StickerShow.vue'
 import CollapseNormal from './components/CollapseNormal.vue'
 import CollapseFace from './components/CollapseFace.vue'
@@ -14,6 +7,25 @@ import DoubleTab from './components/DoubleTab.vue'
 import SaveTab from './components/SaveTab.vue'
 import html2canvas from 'html2canvas'
 import { ref } from 'vue'
+import mobilebrown from './assets/export/mobilebrown.jpg'
+import mobileorange from './assets/export/mobileorange.jpg'
+import mobilepink from './assets/export/mobilepink.jpg'
+import mobilepurple from './assets/export/mobilepurple.jpg'
+import pcbrown from './assets/export/pcbrown.jpg'
+import pcorange from './assets/export/pcorange.jpg'
+import pcpink from './assets/export/pcpink.jpg'
+import pcpurple from './assets/export/pcpurple.jpg'
+
+const expMap: { [propName: string]: string } = {
+  mobilebrown,
+  mobileorange,
+  mobilepink,
+  mobilepurple,
+  pcbrown,
+  pcorange,
+  pcpink,
+  pcpurple
+}
 
 const isFinal = ref(false)
 const finalUrl = ref('')
@@ -58,13 +70,13 @@ const parts = ref({
   tear: false,
   star: false,
   red: true,
-  front: 'birth',
+  front: '',
   bg: 'circle',
   bgColor: 'purple',
   fw: 'circleDot',
   fwColor: 'purple',
   doubleMode: false,
-  eyeLeft: 'smile',
+  eyeLeft: 'smileeye',
   eyeColorLeft: 'purple',
   eyebrowLeft: 'ptm',
   eyebrowColorLeft: 'black',
@@ -113,9 +125,9 @@ function changeCheckSave(name: string, color: string) {
 
 function calcImgStyle() {
   if (checkSave.value === '手机壁纸') {
-    return `--bg-image: url(${imgSrc}/mobilebg/${saveColor.value.saveMobile}.jpg);`
+    return `--bg-image: url(${expMap['mobile' + saveColor.value.saveMobile]});`
   } else if (checkSave.value === '电脑壁纸') {
-    return `--bg-image: url(${imgSrc}/pcbg/${saveColor.value.savePC}.jpg);`
+    return `--bg-image: url(${expMap['pc' + saveColor.value.savePC]});`
   }
   return ''
 }
@@ -193,7 +205,7 @@ body {
   width: 100vw;
   min-height: 200px;
   background-color: #ffd0cf;
-  background-image: url(/assets/screen-bg.png);
+  background-image: url(./assets/screen-bg.png);
   background-size: cover;
   background-position: center;
   --font-color: #333;
