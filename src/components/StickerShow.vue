@@ -88,9 +88,11 @@ defineProps<{
   height: 100%;
   width: 100%;
 }
+
 .photo-left {
   transform: rotateY(180deg) translateX(33%);
 }
+
 .double-mode .photo-right {
   transform: translateX(33%);
 }

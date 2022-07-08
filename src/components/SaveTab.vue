@@ -33,18 +33,8 @@ function chooseBgColor(name: string, color: string) {
   <div class="collapse-tab">
     <div role="tab">
       <div role="button" class="collapse-header" @click="switchShow">
-        <svg
-          class="collapse-savetab-svg"
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#000000"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+        <svg class="collapse-savetab-svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+          fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5" />
         </svg>
         保存为图片
@@ -52,35 +42,14 @@ function chooseBgColor(name: string, color: string) {
     </div>
     <div role="tabpanel" class="collapse-wrap collapse-save" :class="{ active: showTab }">
       <div class="collapse-extra-info" style="width: 290px">点击生成按钮，右键 / 长按图片保存</div>
-      <SaveOpinion
-        title="大头贴"
-        :colorful="false"
-        :checked="checkSave"
-        @click="changeCheckSave('大头贴')"
-      />
-      <SaveOpinion
-        title="手机壁纸"
-        :colorful="true"
-        :checked="checkSave"
-        :active-color="saveColor.saveMobile"
-        @click="changeCheckSave('手机壁纸')"
-        @choose-bg-color="chooseBgColor"
-      />
-      <SaveOpinion
-        title="电脑壁纸"
-        :colorful="true"
-        :checked="checkSave"
-        :active-color="saveColor.savePC"
-        @click="changeCheckSave('电脑壁纸')"
-        @choose-bg-color="chooseBgColor"
-      />
+      <SaveOpinion title="大头贴" :colorful="false" :checked="checkSave" @click="changeCheckSave('大头贴')" />
+      <SaveOpinion title="手机壁纸" :colorful="true" :checked="checkSave" :active-color="saveColor.saveMobile"
+        @click="changeCheckSave('手机壁纸')" @choose-bg-color="chooseBgColor" />
+      <SaveOpinion title="电脑壁纸" :colorful="true" :checked="checkSave" :active-color="saveColor.savePC"
+        @click="changeCheckSave('电脑壁纸')" @choose-bg-color="chooseBgColor" />
       <div class="collapse-extra-btns">
         <div class="collapse-extra-save" @click="saveImage">生 成</div>
-        <a
-          class="collapse-extra-github"
-          href="https://github.com/xiaofengting/nikki-photo"
-          target="_blank"
-        >
+        <a class="collapse-extra-github" href="https://github.com/xiaofengting/nikki-photo" target="_blank">
           Github
         </a>
       </div>
@@ -99,15 +68,18 @@ function chooseBgColor(name: string, color: string) {
   --color-github: #4aa9a4;
   --color-github-hover: #64c3c4;
 }
+
 .collapse-savetab-svg {
   margin: 0 5px;
 }
+
 .collapse-extra-btns {
   width: 270px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .collapse-extra-save {
   background: var(--color-save);
   cursor: pointer;
@@ -118,10 +90,12 @@ function chooseBgColor(name: string, color: string) {
   box-shadow: -1px 1px 8px rgba(0, 0, 0, 0.2);
   display: block;
 }
+
 .collapse-extra-save:hover {
   background: var(--color-save-hover);
   box-shadow: -2px 2px 16px rgba(0, 0, 0, 0.3);
 }
+
 .collapse-extra-github {
   text-decoration: none;
   background: var(--color-github);
@@ -132,6 +106,7 @@ function chooseBgColor(name: string, color: string) {
   box-shadow: -1px 1px 8px rgba(0, 0, 0, 0.2);
   display: block;
 }
+
 .collapse-extra-github:hover {
   background: var(--color-github-hover);
   box-shadow: -2px 2px 16px rgba(0, 0, 0, 0.3);

@@ -29,7 +29,9 @@ function chooseUnitPart(item: string) {
 function chooseUnitColor(color: string) {
   emit('chooseColor', props.unitColor || 'frontHairColor', color)
 }
-function stop() {}
+
+function stop() { }
+
 function calcImgStyle(item: string) {
   let unit = props.unit.replace('Left', '')
   let unitColor = props.unitColor?.replace('Left', '') || ''
@@ -79,59 +81,34 @@ if (props.unit === 'fw') {
 </script>
 
 <template>
-  <div
-    class="collapse-tab"
-    :class="{
-      'collapse-img-hair': unit.startsWith('hair'),
-      'collapse-img-frontHair': unit.startsWith('frontHair')
-    }"
-  >
+  <div class="collapse-tab" :class="{
+    'collapse-img-hair': unit.startsWith('hair'),
+    'collapse-img-frontHair': unit.startsWith('frontHair')
+  }">
     <div role="tab">
       <div role="button" class="collapse-header" @click="switchShow">
-        <svg
-          :class="{ 'svg-active': showTab }"
-          xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#000000"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+        <svg :class="{ 'svg-active': showTab }" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+          viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
           <path d="M9 18l6-6-6-6" />
         </svg>
         <div class="collapse-title">{{ title }}</div>
         <div v-if="colorful" class="collapse-color" @click.stop="stop()">
-          <div
-            v-for="item in colorPicks"
-            class="collapse-color-item"
-            :class="{ active: activeColor === item.name }"
-            :style="`--color-pick: ${item.value}`"
-            @click.stop="chooseUnitColor(item.name)"
-          ></div>
+          <div v-for="item in colorPicks" class="collapse-color-item" :class="{ active: activeColor === item.name }"
+            :style="`--color-pick: ${item.value}`" @click.stop="chooseUnitColor(item.name)"></div>
         </div>
       </div>
     </div>
     <div v-if="showTab" role="tabpanel" class="collapse-wrap" :class="{ active: showTab }">
-      <div
-        v-for="item in arr"
-        class="collapse-img"
-        :class="{ active: item === active }"
-        :style="calcImgStyle(item)"
-        @click="chooseUnitPart(item)"
-      ></div>
-      <p
-        v-if="unit === 'fw' && activeColor === 'pink'"
-        class="collapse-extra-info"
-        style="width: 290px"
-      >
+      <div v-for="item in arr" class="collapse-img" :class="{ active: item === active }" :style="calcImgStyle(item)"
+        @click="chooseUnitPart(item)"></div>
+      <p v-if="unit === 'fw' && activeColor === 'pink'" class="collapse-extra-info" style="width: 290px">
         说明：后两项为透明，需选择上一项背景
       </p>
     </div>
   </div>
 </template>
+
 <style>
 .collapse-img-frontHair .collapse-img::after,
 .collapse-img-hair .collapse-img::after {
@@ -143,15 +120,19 @@ if (props.unit === 'fw') {
   right: 0;
   bottom: 0;
 }
+
 .collapse-img-frontHair .collapse-img {
   background-image: url(../assets/body.png);
 }
+
 .collapse-img-frontHair .collapse-img::after {
   background-image: var(--before-image);
 }
+
 .collapse-img-hair .collapse-img::after {
   background-image: url(../assets/body.png);
 }
+
 .collapse-extra-info {
   line-height: 30px;
   background-color: #fff;
